@@ -11,7 +11,13 @@ class InputForm extends React.Component {
     
     return (
       <form className="uk-form">
-        <legend>Search for a GitHub repository</legend>
+        <legend>
+          {
+            error
+            ? 'Oops... please try again later'
+            : 'Search for a GitHub repository'
+          }
+        </legend>
         <div className="uk-grid">
           <div className="InputContainer uk-width-1-1">
             <span className="Placeholder">{placeholderText}</span>
@@ -29,6 +35,13 @@ class InputForm extends React.Component {
       </form>
     )
   }
+}
+
+InputForm.propTypes = {
+  value: PropTypes.string.isRequired,
+  placeholderText: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  error: PropTypes.bool.isRequired,
 }
 
 export default InputForm;

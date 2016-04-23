@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const RepoInfo = ({ name, description, language = 'Javascript', link }) => {
+const RepoInfo = ({ name, description, language = 'Javascript', url }) => {
   return (
     <dl className="RepoInfo uk-description-list-horizontal">
       <dt>Full Name</dt>
@@ -10,7 +10,7 @@ const RepoInfo = ({ name, description, language = 'Javascript', link }) => {
       <dt>Language</dt>
       <dd>{language}</dd>
       <dt>Link</dt>
-      <dd><a href={link} className="uk-text-primary">{link}</a></dd>
+      <dd><a href={url} className="uk-text-primary" target="_blank">{url}</a></dd>
     </dl>
   )
 }
@@ -19,7 +19,7 @@ RepoInfo.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   language: PropTypes.string,
-  link: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 }
 
 export default RepoInfo;
