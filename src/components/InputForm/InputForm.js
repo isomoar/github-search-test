@@ -1,7 +1,15 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
+require('./InputForm.css');
+
 class InputForm extends React.Component {
+  onKeyDown(e) {
+    if (e.keyCode === 9) {
+      e.preventDefault();
+      this.props.onTabPress();
+    }
+  }
   render () {
     const { value, placeholderText, onChange, error, repoOwnerName } = this.props;
     const inputClassNames = classNames({
@@ -24,7 +32,8 @@ class InputForm extends React.Component {
             <div className="RepoOwnerWrapper">
               <span className="RepoOwner">{repoOwnerName}</span>
             </div>
-            <input 
+            <input
+              onKeyDown={::this.onKeyDown} 
               className={inputClassNames}
               onChange={onChange}
               type="text" 
@@ -43,6 +52,7 @@ InputForm.propTypes = {
   placeholderText: PropTypes.string.isRequired,
   repoOwnerName: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  onTabPress: PropTypes.func.isRequired,
 }
 
 export default InputForm;

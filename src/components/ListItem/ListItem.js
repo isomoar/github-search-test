@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+require('./ListItem.css');
+
 const ListItem = ({ itemIndex, item, onClick }) => {
   return (
     <li className="List-item" onClick={onClick.bind(null, itemIndex)}>

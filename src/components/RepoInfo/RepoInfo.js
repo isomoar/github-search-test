@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+require('./RepoInfo.css');
+
 const RepoInfo = ({ name, description, language, url }) => {
   return (
     <dl className="RepoInfo uk-description-list-horizontal">

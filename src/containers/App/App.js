@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { getRepos, searchInputValueChange, getRepoOwnerName } from '../../redux/actions/app';
+import { getRepos, searchInputValueChange, getRepoOwnerName } from 'redux/actions/app';
 import { List, InputForm, RepoInfo } from 'components';
 
 require('./App.css');
@@ -17,7 +17,7 @@ class App extends Component {
   componentDidMount() {
     this.props.dispatch(getRepoOwnerName());
   }
-  onItemClick(itemIndex) {
+  onItemClick(itemIndex = 0) {
     const itemName = this.props.items[itemIndex].name;
     this.props.dispatch(searchInputValueChange(itemName));
     this.setState({
@@ -37,6 +37,7 @@ class App extends Component {
     return (
       <div className="App ui-width-1-1 uk-width-medium-1-2 uk-width-large-1-3 uk-container-center">
         <InputForm
+          onTabPress={::this.onItemClick}
           error={this.props.error}
           placeholderText={this.props.placeholderText}
           onChange={::this.onInputChange}

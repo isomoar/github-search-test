@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { ListItem } from 'components';
 
+require('./List.css');
+
 const List = ({ items, onItemClick }) => {
   return (
     <ul className="List uk-list uk-list-line">
