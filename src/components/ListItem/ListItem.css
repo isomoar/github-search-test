@@ -1,0 +1,18 @@
+
+.List-item {
+  padding: 5px 5px 10px 10px;
+  cursor: pointer;
+  margin-top: 0!important;
+}
+
+.List-item:hover {
+  background: #eee;
+} 
+
+.List-item-name {
+  margin-bottom: 5px;
+}
+
+.List-item-desc {
+  margin: 0;
+}
