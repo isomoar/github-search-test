@@ -9,8 +9,9 @@ export const getReposRequest = () => ({
   type: GET_REPOS_REQUEST,
 })
 
-export const getReposSuccess = () => ({
+export const getReposSuccess = (items) => ({
   type: GET_REPOS_SUCCESS,
+  items,
 })
 
 export const getReposError = () => ({
@@ -24,7 +25,7 @@ export const getRepos = (value) => {
     function makeRequest() {
       if (getState().app.pending) return;
       
-      dispatch(getReposRequest(value, state.app.repoOwnerName));
+      dispatch(getReposRequest());
       
       request(`/search/repositories?q=${value} in:name user:facebook`, {
         method: 'get',

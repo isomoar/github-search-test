@@ -1,17 +1,20 @@
 import React, { PropTypes } from 'react';
 
-const ListItem = ({ name, description, onClick }) => {
+const ListItem = ({ item, onClick }) => {
   return (
     <li className="List-item" onClick={onClick}>
-      <p className="List-item-name uk-text-bold">{name}</p>
-      <p className="List-item-desc uk-text-muted">{description}</p>
+      <p className="List-item-name uk-text-bold">{item.name}</p>
+      <p className="List-item-desc uk-text-muted">{item.description}</p>
     </li>
   )
 }
 
 ListItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  item: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+  }),
+  onClick: PropTypes.func.isRequired,
 }
 
 export default ListItem;

@@ -7,7 +7,6 @@ const initialState = {
   error: false,
   placeholderValue: '',
   repoOwnerName: 'facebook',
-  searchValue: '',
 };
 
 export default createReducer(initialState, {

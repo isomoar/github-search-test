@@ -1,8 +1,14 @@
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 
 class InputForm extends React.Component {
   render () {
-    const { value, placeholderText, onChange } = this.props;
+    const { value, placeholderText, onChange, error } = this.props;
+    const inputClassNames = classNames({
+      'Input uk-width-1': true,
+      'uk-form-danger': error,
+    });
+    
     return (
       <form className="uk-form">
         <legend>Search for a GitHub repository</legend>
@@ -13,7 +19,7 @@ class InputForm extends React.Component {
               <span className="RepoOwner">React Community</span>
             </div>
             <input 
-              className="Input uk-width-1-1" 
+              className={inputClassNames}
               onChange={onChange}
               type="text" 
               value={value}
