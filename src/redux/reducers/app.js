@@ -28,16 +28,21 @@ function getPlaceholderText(value, items) {
   return pt;
 }
 
+function filterItems(value, items) {
+  const regexp = new RegExp(`^${value}(.*)$`, 'i');
+  return items.filter(item => regexp.test(item.name));
+}
+
 export default createReducer(initialState, {
   [SEARCH_INPUT_VALUE_CHANGE]: (state, action) => {
     return Object.assign({}, state, {
+      items: filterItems(action.value, state.items),
       searchInputValue: action.value,
       placeholderText: getPlaceholderText(action.value, state.items),
     })
   },
   [GET_REPOS_REQUEST]: (state, action) => Object.assign({}, state, {
     pending: true,
-    showNothingFound: false,
   }),
   [GET_REPOS_ERROR]: (state, action) => Object.assign({}, state, {
     pending: false,
@@ -45,7 +50,7 @@ export default createReducer(initialState, {
     showNothingFound: false,
   }),
   [GET_REPOS_SUCCESS]: (state, action) => {
-    const items = action.items.map(elem => {
+    let items = action.items.map(elem => {
       return {
         name: elem.name,
         language: elem.language,
@@ -53,6 +58,7 @@ export default createReducer(initialState, {
         url: elem.html_url,
       }
     });
+    items = filterItems(state.searchInputValue, items);
     
     return Object.assign({}, state, {
       pending: false,

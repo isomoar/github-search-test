@@ -52,9 +52,7 @@ class App extends Component {
         {
           !this.state.showRepoInfo && searchInputValue.length > 0 && !error && !showNothingFound
           ? <List
-            items={items
-              .filter(item => item.name.toLowerCase().includes(searchInputValue.toLowerCase()))
-              .slice(0, 3)}
+            items={items.slice(0, 3)}
             onItemClick={::this.onItemClick}
           />
           : null
