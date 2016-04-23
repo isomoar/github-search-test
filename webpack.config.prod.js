@@ -22,7 +22,11 @@ module.exports = {
       compressor: {
         warnings: false
       }
-    })
+    }),
+    new webpack.DefinePlugin({
+      __DEVELOPMENT__: false,
+      __DEVTOOLS__: false,
+    }),
   ],
   module: {
     loaders: [{

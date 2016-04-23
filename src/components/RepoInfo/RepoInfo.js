@@ -6,7 +6,7 @@ const RepoInfo = ({ name, description, language = 'Javascript', link }) => {
       <dt>Full Name</dt>
       <dd>{name}</dd>
       <dt>Description</dt>
-      <dd>{description}/dd>
+      <dd>{description}</dd>
       <dt>Language</dt>
       <dd>{language}</dd>
       <dt>Link</dt>

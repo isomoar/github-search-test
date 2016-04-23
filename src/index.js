@@ -1,5 +1,29 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from 'containers/App/App';
+import { Provider } from 'react-redux';
 
-render(<App />, document.getElementById('root'));
+import { DevTools } from './components';
+import App from 'containers/App/App';
+import createStore from './redux/create';
+
+const store = createStore();
+const root = document.getElementById('root');
+
+if (__DEVTOOLS__ && !window.devToolsExtension) {
+  render(
+    <Provider store={store} key="provider">
+      <div>
+        <App />
+         <DevTools />
+      </div>
+    </Provider>,
+    root
+  );
+} else {
+  render(
+    <Provider store={store} key="provider">
+      <App />
+    </Provider>,
+    root
+  );
+}
