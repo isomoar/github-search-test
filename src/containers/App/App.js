@@ -33,7 +33,7 @@ class App extends Component {
     this.props.dispatch(getRepos(e.target.value));
   }
   render() {
-    const { error, placeholderText, items, searchInputValue, repoOwnerName } = this.props;
+    const { error, placeholderText, items, searchInputValue, repoOwnerName, showNothingFound } = this.props;
     return (
       <div className="App ui-width-1-1 uk-width-medium-1-2 uk-width-large-1-3 uk-container-center">
         <InputForm
@@ -50,13 +50,18 @@ class App extends Component {
           : null
         }
         {
-          !this.state.showRepoInfo && searchInputValue.length > 0 && !error
+          !this.state.showRepoInfo && searchInputValue.length > 0 && !error && !showNothingFound
           ? <List
             items={items
               .filter(item => item.name.toLowerCase().includes(searchInputValue.toLowerCase()))
               .slice(0, 3)}
             onItemClick={::this.onItemClick}
           />
+          : null
+        }
+        {
+          showNothingFound
+          ? <p className="uk-text-muted">Nothing found ¯\_(ツ)_/¯</p>
           : null
         }
       </div>
@@ -70,11 +75,12 @@ App.propTypes = {
      description: PropTypes.string.isRequired,
      url: PropTypes.string.isRequired,
    })).isRequired,
-  pending: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
+  pending: PropTypes.bool.isRequired,
   placeholderText: PropTypes.string.isRequired,
   repoOwnerName: PropTypes.string.isRequired,
   searchInputValue: PropTypes.string.isRequired,
+  showNothingFound: PropTypes.bool.isRequired,
 }
 
 export default connect(state => state.app)(App);

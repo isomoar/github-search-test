@@ -2,12 +2,12 @@ import { createReducer } from 'redux-create-reducer';
 import { SEARCH_INPUT_VALUE_CHANGE, GET_REPOS_REQUEST, GET_REPOS_ERROR, GET_REPOS_SUCCESS, GET_REPO_OWNER_NAME_SUCCESS } from '../actions/app';
 
 const initialState = {
+  error: false,
   items: [],
   pending: false,
-  error: false,
   placeholderText: '',
-  searchInputValue: '',
   repoOwnerName: '',
+  searchInputValue: '',
 };
 
 function getPlaceholderText(value, items) {
@@ -37,10 +37,12 @@ export default createReducer(initialState, {
   },
   [GET_REPOS_REQUEST]: (state, action) => Object.assign({}, state, {
     pending: true,
+    showNothingFound: false,
   }),
   [GET_REPOS_ERROR]: (state, action) => Object.assign({}, state, {
     pending: false,
     error: true,
+    showNothingFound: false,
   }),
   [GET_REPOS_SUCCESS]: (state, action) => {
     const items = action.items.map(elem => {
@@ -51,11 +53,12 @@ export default createReducer(initialState, {
         url: elem.html_url,
       }
     });
-  
+    
     return Object.assign({}, state, {
       pending: false,
       error: false,
       items,
+      showNothingFound: items.length === 0,
       placeholderText: getPlaceholderText(state.searchInputValue, items),
     })
   },

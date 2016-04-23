@@ -22,7 +22,7 @@ class InputForm extends React.Component {
         <legend>
           {
             error
-            ? 'Oops... please try again later'
+            ? 'Oops... please try again in a minute'
             : 'Search for a GitHub repository'
           }
         </legend>
