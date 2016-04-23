@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { getRepos, searchInputValueChange } from '../../redux/actions/app';
+import { getRepos, searchInputValueChange, getRepoOwnerName } from '../../redux/actions/app';
 import { List, InputForm, RepoInfo } from 'components';
 
 require('./App.css');
@@ -13,6 +13,9 @@ class App extends Component {
       itemIndex: 0,
       showRepoInfo: false,
     };
+  }
+  componentDidMount() {
+    this.props.dispatch(getRepoOwnerName());
   }
   onItemClick(itemIndex) {
     const itemName = this.props.items[itemIndex].name;
@@ -30,7 +33,7 @@ class App extends Component {
     this.props.dispatch(getRepos(e.target.value));
   }
   render() {
-    const { error, placeholderText, items, searchInputValue } = this.props;
+    const { error, placeholderText, items, searchInputValue, repoOwnerName } = this.props;
     return (
       <div className="App ui-width-1-1 uk-width-medium-1-2 uk-width-large-1-3 uk-container-center">
         <InputForm
@@ -38,10 +41,11 @@ class App extends Component {
           placeholderText={this.props.placeholderText}
           onChange={::this.onInputChange}
           value={searchInputValue}
+          repoOwnerName={repoOwnerName}
           />
         {
           this.state.showRepoInfo
-          ? <RepoInfo {...items[this.state.itemIndex]} />
+          ? <RepoInfo {...items[this.state.itemIndex]}  />
           : null
         }
         {
@@ -68,6 +72,7 @@ App.propTypes = {
   pending: PropTypes.bool.isRequired,
   error: PropTypes.bool.isRequired,
   placeholderText: PropTypes.string.isRequired,
+  repoOwnerName: PropTypes.string.isRequired,
   searchInputValue: PropTypes.string.isRequired,
 }
 

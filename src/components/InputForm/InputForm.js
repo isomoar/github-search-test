@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 class InputForm extends React.Component {
   render () {
-    const { value, placeholderText, onChange, error } = this.props;
+    const { value, placeholderText, onChange, error, repoOwnerName } = this.props;
     const inputClassNames = classNames({
       'Input uk-width-1': true,
       'uk-form-danger': error,
@@ -22,7 +22,7 @@ class InputForm extends React.Component {
           <div className="InputContainer uk-width-1-1">
             <span className="Placeholder">{placeholderText}</span>
             <div className="RepoOwnerWrapper">
-              <span className="RepoOwner">React Community</span>
+              <span className="RepoOwner">{repoOwnerName}</span>
             </div>
             <input 
               className={inputClassNames}
@@ -38,10 +38,11 @@ class InputForm extends React.Component {
 }
 
 InputForm.propTypes = {
-  value: PropTypes.string.isRequired,
-  placeholderText: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
   error: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholderText: PropTypes.string.isRequired,
+  repoOwnerName: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 }
 
 export default InputForm;

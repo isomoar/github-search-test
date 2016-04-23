@@ -1,5 +1,7 @@
 import 'isomorphic-fetch';
 
+const BASE_URL = 'https://api.github.com';
+
 export default function request(url, options) {
   return new Promise((resolve, reject) => {
     if (!url) {
@@ -15,11 +17,11 @@ export default function request(url, options) {
        'Content-Type': 'application/json',
      };
     
-    fetch('https://api.github.com' + url, options).then(response => {
+    fetch(BASE_URL + url, options).then(response => {
+      if (response.status > 200 && response.status < 400) reject(response);
       return response.json();
     }).then(response => {
-      if (response.message || !response.items) reject(response);
-      else resolve(response);
+      resolve(response);
     }).catch(error => {
       reject(error);
     });

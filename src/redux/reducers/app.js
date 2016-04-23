@@ -1,13 +1,13 @@
 import { createReducer } from 'redux-create-reducer';
-import { SEARCH_INPUT_VALUE_CHANGE, GET_REPOS_REQUEST, GET_REPOS_ERROR, GET_REPOS_SUCCESS } from '../actions/app';
+import { SEARCH_INPUT_VALUE_CHANGE, GET_REPOS_REQUEST, GET_REPOS_ERROR, GET_REPOS_SUCCESS, GET_REPO_OWNER_NAME_SUCCESS } from '../actions/app';
 
 const initialState = {
   items: [],
   pending: false,
   error: false,
   placeholderText: '',
-  repoOwnerName: 'facebook',
   searchInputValue: '',
+  repoOwnerName: '',
 };
 
 function getPlaceholderText(value, items) {
@@ -30,12 +30,10 @@ function getPlaceholderText(value, items) {
 
 export default createReducer(initialState, {
   [SEARCH_INPUT_VALUE_CHANGE]: (state, action) => {
-    
     return Object.assign({}, state, {
       searchInputValue: action.value,
       placeholderText: getPlaceholderText(action.value, state.items),
     })
-    
   },
   [GET_REPOS_REQUEST]: (state, action) => Object.assign({}, state, {
     pending: true,
@@ -48,6 +46,7 @@ export default createReducer(initialState, {
     const items = action.items.map(elem => {
       return {
         name: elem.name,
+        language: elem.language,
         description: elem.description,
         url: elem.html_url,
       }
@@ -59,5 +58,8 @@ export default createReducer(initialState, {
       items,
       placeholderText: getPlaceholderText(state.searchInputValue, items),
     })
-  }
+  },
+  [GET_REPO_OWNER_NAME_SUCCESS]: (state, action) => Object.assign({}, state, {
+    repoOwnerName: action.name,
+  })
 })

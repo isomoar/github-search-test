@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const RepoInfo = ({ name, description, language = 'Javascript', url }) => {
+const RepoInfo = ({ name, description, language, url }) => {
   return (
     <dl className="RepoInfo uk-description-list-horizontal">
       <dt>Full Name</dt>
