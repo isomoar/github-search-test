@@ -4,6 +4,7 @@
   "main": "devServer.js",
   "scripts": {
     "start": "node devServer.js",
+    "build": "webpack --config=webpack.config.prod.js --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
