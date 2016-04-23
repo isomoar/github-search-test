@@ -1,11 +1,8 @@
 import React, { PropTypes } from 'react';
 
 class InputForm extends React.Component {
-  onChange(e) {
-    e.preventDefault();
-  }
   render () {
-    const { value, placeholderText } = this.props;
+    const { value, placeholderText, onChange } = this.props;
     return (
       <form className="uk-form">
         <legend>Search for a GitHub repository</legend>
@@ -17,7 +14,7 @@ class InputForm extends React.Component {
             </div>
             <input 
               className="Input uk-width-1-1" 
-              onChange={::this.onChange}
+              onChange={onChange}
               type="text" 
               value={value}
             />
